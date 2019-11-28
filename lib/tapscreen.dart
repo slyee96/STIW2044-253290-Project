@@ -249,7 +249,7 @@ class _TabScreenState extends State<TabScreen> {
     String urlLoadJobs = "http://myondb.com/myNelayanLY/php/load_fishes.php";
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
-    pr.style(message: "Loading Jobs");
+    pr.style(message: "Loading Fishes");
     pr.show();
     http.post(urlLoadJobs, body: {
       "Email": widget.user.email ?? "notavail",

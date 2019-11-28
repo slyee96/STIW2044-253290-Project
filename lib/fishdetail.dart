@@ -241,7 +241,6 @@ class _DetailInterfaceState extends State<DetailInterface> {
 
   void _onLogin(String email, BuildContext ctx) {
     String urlgetuser = "http://myondb.com/myNelayanLY/php/get_user.php";
-
     http.post(urlgetuser, body: {
       "Email": email,
     }).then((res) {
