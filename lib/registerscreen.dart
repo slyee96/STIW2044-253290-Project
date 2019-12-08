@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'loginscreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 File _image;
 String pathAsset = 'assets/images/profile.png';
@@ -244,22 +245,27 @@ class RegisterWidgetState extends State<RegisterWidget> {
       String base64Image = base64Encode(_image.readAsBytesSync());
       http.post(urlUpload, body: {
         "encoded_string": base64Image,
-        "Name": _name,
-        "Phone": _phone,
-        "Email": _email,
-        "Password": _password,
+        "name": _name,
+        "phone": _phone,
+        "email": _email,
+        "password": _password,
       }).then((res) {
         print(res.statusCode);
-        Toast.show(res.body, context,
-            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-        _image = null;
-        _namecontroller.text = '';
-        _phcontroller.text = '';
-        _emcontroller.text = '';
-        _passcontroller.text = '';
-        pr.dismiss();
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (BuildContext context) => LoginPage()));
+        if (res.body == "success") {
+          Toast.show(res.body, context,
+              duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+          _image = null;
+          savepref(_email, _password);
+          _namecontroller.text = '';
+          _phcontroller.text = '';
+          _emcontroller.text = '';
+          _passcontroller.text = '';
+          pr.dismiss();
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => LoginPage()));
+        }
       }).catchError((err) {
         print(err);
       });
@@ -280,5 +286,17 @@ class RegisterWidgetState extends State<RegisterWidget> {
     setState(() {
       _isChecked = value;
     });
+  }
+
+  Future savepref(String email, String password) async {
+    print('Inside savepref');
+    _email = _emcontroller.text;
+    _password = _passcontroller.text;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //true save pref
+    await prefs.setString('email', email);
+    await prefs.setString('pass', password);
+    print('Save pref $_email');
+    print('Save pref $_password');
   }
 }

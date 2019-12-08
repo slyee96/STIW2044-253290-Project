@@ -127,9 +127,9 @@ class _ResetPasswordState extends State<ResetPasswordScreen> {
       pr.style(message: "Reset Password in progress");
       pr.show();
       http.post(urlReset, body: {
-        "Email": email,
-        "TemPassword": _tempassword,
-        "NewPassword": _password,
+        "mmail": email,
+        "temPassword": _tempassword,
+        "newPassword": _password,
       }).then((res) {
         print(res.statusCode);
         Toast.show(res.body, context,

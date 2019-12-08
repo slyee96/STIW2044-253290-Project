@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 include_once("dbconnect.php");
-$email = $_POST['Email'];
+$email = $_POST['email'];
 
 $sql = "SELECT * FROM User WHERE Email = '$email'";
 $result = $conn->query($sql);

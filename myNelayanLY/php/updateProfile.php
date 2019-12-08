@@ -2,10 +2,10 @@
 error_reporting(0);
 include_once("dbconnect.php");
 
-$name = $_POST['Name'];
-$phone = $_POST['Phone'];
-$email = $_POST['Email'];
-$password = $_POST['Password'];
+$name = $_POST['name'];
+$phone = $_POST['phone'];
+$email = $_POST['email'];
+$password = $_POST['password'];
 
 $usersql = "SELECT * FROM User WHERE Email = '$email'";
 

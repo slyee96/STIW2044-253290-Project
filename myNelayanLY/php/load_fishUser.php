@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 include_once("dbconnect.php");
-$email = $_POST['Email'];
+$email = $_POST['email'];
 
 $sql = "SELECT * FROM Fish WHERE FishOwner = '$email'  ORDER BY FishID DESC";
 
@@ -15,7 +15,7 @@ if ($result->num_rows > 0) {
         $fishlist[fishowner] = $row["FishOwner"];
         $fishlist[fishdescption] = $row["FishDescription"];
         $fishlist[fishprice] = $row["FishPrice"];
-        $fishlist[fishtime] = date_format(date_create($row["pFishCatchTime"]), 'd/m/Y h:i:s');
+        $fishlist[fishtime] = date_format(date_create($row["FishCatchTime"]), 'd/m/Y h:i:s');
         $fishlist[fishimage] = $row["FishImage"];
         $fishlist[fishlatitude] = $row["Latitude"];
         $fishlist[fishlongitude] = $row["Longitude"];

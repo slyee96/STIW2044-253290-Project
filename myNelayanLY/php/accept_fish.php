@@ -1,9 +1,9 @@
 <?php
 error_reporting(0);
 include_once("dbconnect.php");
-$fishid = $_POST['FishID'];
-$email = $_POST['Email'];
-$wallet = $_POST['Wallet'];
+$fishid = $_POST['fishid'];
+$email = $_POST['email'];
+$wallet = $_POST['wallet'];
 
 $sql = "UPDATE Fish SET FishAccepted = '$email'  WHERE FishID = '$fishid'";
 if ($conn->query($sql) === TRUE) {

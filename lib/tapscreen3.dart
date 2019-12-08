@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/services.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:toast/toast.dart';
-
 import 'user.dart';
 
 double perpage = 1;
@@ -70,8 +68,8 @@ class _TabScreen3State extends State<TabScreen3> {
                                   ),
                                   SizedBox(height: 10),
                                   Container(
-                                    width: 300,
-                                    height: 140,
+                                    width: 280,
+                                    height: 100,
                                     child: Card(
                                       child: Padding(
                                         padding: EdgeInsets.all(5.0),
@@ -195,18 +193,6 @@ class _TabScreen3State extends State<TabScreen3> {
                                             style: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold)),
-                                        RatingBar(
-                                          itemCount: 5,
-                                          itemSize: 12,
-                                          initialRating: double.parse(
-                                              data[index]['fishrating}']
-                                                  .toString()),
-                                          itemPadding: EdgeInsets.symmetric(
-                                              horizontal: 2.0),
-                                          itemBuilder: (context, _) => Icon(
-                                              Icons.star,
-                                              color: Colors.orange),
-                                        ),
                                         SizedBox(
                                           height: 5,
                                         ),
@@ -268,7 +254,7 @@ class _TabScreen3State extends State<TabScreen3> {
     pr.style(message: "Loading All Accepted Fishes");
     pr.show();
     http.post(urlLoadJobs, body: {
-      "Email": widget.user.email ?? "notavail",
+      "email": widget.user.email ?? "notavail",
     }).then((res) {
       setState(() {
         var extractdata = json.decode(res.body);
@@ -287,7 +273,7 @@ class _TabScreen3State extends State<TabScreen3> {
 
   Future init() async {
     if (widget.user.email == "user@noregister") {
-      Toast.show("Please register to view accepted Jobs", context,
+      Toast.show("Please register to view accepted fishes", context,
           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       return;
     } else {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/services.dart';
 import 'package:project_mynelayan/newfish.dart';
@@ -182,58 +181,50 @@ class _TabScreen2State extends State<TabScreen2> {
                         elevation: 2,
                         child: InkWell(
                           onLongPress: () => _onFishDelete(
-                              data[index]['fishID'].toString(),
+                              data[index]['fishid'].toString(),
                               data[index]['fishtitle'].toString()),
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Row(
-                              children: <Widget>[
-                                Container(
-                                    height: 100,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(color: Colors.white),
-                                        image: DecorationImage(
-                                            fit: BoxFit.fill,
-                                            image: NetworkImage(
-                                                "http://myondb.com/myhelper/images/${data[index]['fishimage']}.jpg")))),
-                                Expanded(
-                                  child: Container(
-                                    child: Column(
-                                      children: <Widget>[
-                                        Text(
-                                            data[index]['fishtitle']
-                                                .toString()
-                                                .toUpperCase(),
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold)),
-                                        RatingBar(
-                                          itemCount: 5,
-                                          itemSize: 12,
-                                          initialRating: double.parse(
-                                              data[index]['fishrating']
-                                                  .toString()),
-                                          itemPadding: EdgeInsets.symmetric(
-                                              horizontal: 2.0),
-                                          itemBuilder: (context, _) => Icon(
-                                              Icons.star,
-                                              color: Colors.orange),
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text("RM " + data[index]['fishprice']),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text(data[index]['fishtime']),
-                                      ],
+                          child: InkWell(
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Container(
+                                      height: 100,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          image: DecorationImage(
+                                              fit: BoxFit.fill,
+                                              image: NetworkImage(
+                                                  "http://myondb.com/myhelper/images/${data[index]['fishimage']}.jpg")))),
+                                  Expanded(
+                                    child: Container(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Text(
+                                              data[index]['fishtitle']
+                                                  .toString()
+                                                  .toUpperCase(),
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold)),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Text(
+                                              "RM " + data[index]['fishprice']),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Text(data[index]['fishtime']),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -281,7 +272,7 @@ class _TabScreen2State extends State<TabScreen2> {
     pr.style(message: "Loading All Accepted Fish");
     pr.show();
     http.post(urlLoadJobs, body: {
-      "Email": widget.user.email ?? "notavail",
+      "email": widget.user.email ?? "notavail",
     }).then((res) {
       setState(() {
         var extractdata = json.decode(res.body);
@@ -375,7 +366,7 @@ class _TabScreen2State extends State<TabScreen2> {
     pr.style(message: "Deleting Fish");
     pr.show();
     http.post(urlLoadJobs, body: {
-      "FishID": fishID,
+      "fishid": fishID,
     }).then((res) {
       print(res.body);
       if (res.body == "success") {

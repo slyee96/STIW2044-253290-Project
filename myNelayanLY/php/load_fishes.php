@@ -1,9 +1,9 @@
 <?php
 error_reporting(0);
 include_once("dbconnect.php");
-$email = $_POST['Email'];
-$latitude = $_POST['fishlatitude'];
-$longitude = $_POST['fishlongitude'];
+$email = $_POST['email'];
+$latitude = $_POST['latitude'];
+$longitude = $_POST['longitude'];
 
 $sql = "SELECT * FROM Fish WHERE FishAccepted IS NULL ORDER BY FishID DESC";
 
@@ -17,16 +17,16 @@ if ($result->num_rows > 0) {
         $fishlist[fishowner] = $row["FishOwner"];
         $fishlist[fishdescption] = $row["FishDescription"];
         $fishlist[fishprice] = $row["FishPrice"];
-        $fishlist[fishtime] = date_format(date_create($row["pFishCatchTime"]), 'd/m/Y h:i:s');
+        $fishlist[fishtime] = date_format(date_create($row["FishCatchTime"]), 'd/m/Y h:i:s');
         $fishlist[fishimage] = $row["FishImage"];
         $fishlist[fishlatitude] = $row["Latitude"];
         $fishlist[fishlongitude] = $row["Longitude"];
         $fishlist[km] = distance($latitude,$longitude,$row["Latitude"],$row["Longitude"]);
         $fishlist[fishrating] = $row["Rating"];
         //$fishlist[radius] = $row["LATITUDE"];
-        if (distance($latitude,$longitude,$row["Latitude"],$row["Longitude"])<$radius){
+        // if (distance($latitude,$longitude,$row["Latitude"],$row["Longitude"])<$radius){
             array_push($response["fishes"], $fishlist);    
-        }
+        //}
     }
     echo json_encode($response);
 }else{

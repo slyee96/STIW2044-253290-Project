@@ -205,14 +205,13 @@ class _CreateNewJobState extends State<CreateNewJob> {
 
     http.post(urlUpload, body: {
       "encoded_string": base64Image,
-      "Email": widget.user.email,
-      "FishTittle": _fishcontroller.text,
-      "FishDescription": _descriptionccontroller.text,
-      "FishPrice": _pricecontroller.text,
-      "Latitude": _currentPosition.latitude.toString(),
-      "Longitude": _currentPosition.longitude.toString(),
-      "Wallet": widget.user.wallet,
-      "Rating": widget.user.rating
+      "email": widget.user.email,
+      "fishtittle": _fishcontroller.text,
+      "fishdescription": _descriptionccontroller.text,
+      "fishprice": _pricecontroller.text,
+      "latitude": _currentPosition.latitude.toString(),
+      "longitude": _currentPosition.longitude.toString(),
+      "wallet": widget.user.wallet,
     }).then((res) {
       print(urlUpload);
       Toast.show(res.body, context,
@@ -227,8 +226,8 @@ class _CreateNewJobState extends State<CreateNewJob> {
         _onLogin(widget.user.email, context);
       } else {
         pr.dismiss();
-        //Toast.show(res.body + ". Please reload", context,
-        //duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+        Toast.show(res.body + ". Please reload", context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       }
     }).catchError((err) {
       print(err);
@@ -238,7 +237,7 @@ class _CreateNewJobState extends State<CreateNewJob> {
 
   void _onLogin(String email, BuildContext ctx) {
     http.post(urlgetuser, body: {
-      "Email": email,
+      "email": email,
     }).then((res) {
       print(res.statusCode);
       var string = res.body;
@@ -246,12 +245,7 @@ class _CreateNewJobState extends State<CreateNewJob> {
       print(dres);
       if (dres[0] == "success") {
         User user = new User(
-            name: dres[1],
-            email: dres[2],
-            phone: dres[3],
-            radius: dres[6],
-            wallet: dres[7],
-            rating: dres[8]);
+            name: dres[1], email: dres[2], phone: dres[4], wallet: dres[7]);
         Navigator.push(ctx,
             MaterialPageRoute(builder: (context) => MainScreen(user: user)));
       }

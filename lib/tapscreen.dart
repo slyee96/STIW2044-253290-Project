@@ -8,7 +8,6 @@ import 'user.dart';
 import 'dart:convert';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:geolocator/geolocator.dart';
 
 double perpage = 1;
@@ -203,25 +202,12 @@ class _TabScreenState extends State<TabScreen> {
                                   child: Column(
                                     children: <Widget>[
                                       Text(
-                                          data[index]['fishtittle']
+                                          data[index]['fishtitle']
                                               .toString()
                                               .toUpperCase(),
                                           style: TextStyle(
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold)),
-                                      RatingBar(
-                                        itemCount: 5,
-                                        itemSize: 12,
-                                        initialRating: double.parse(data[index]
-                                                ['fishrating']
-                                            .toString()),
-                                        itemPadding: EdgeInsets.symmetric(
-                                            horizontal: 2.0),
-                                        itemBuilder: (context, _) => Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
-                                        ),
-                                      ),
                                       SizedBox(
                                         height: 5,
                                       ),
@@ -252,9 +238,9 @@ class _TabScreenState extends State<TabScreen> {
     pr.style(message: "Loading Fishes");
     pr.show();
     http.post(urlLoadJobs, body: {
-      "Email": widget.user.email ?? "notavail",
-      "Latitude": _currentPosition.latitude.toString(),
-      "Longitude": _currentPosition.longitude.toString(),
+      "email": widget.user.email ?? "notavail",
+      "latitude": _currentPosition.latitude.toString(),
+      "longitude": _currentPosition.longitude.toString(),
     }).then((res) {
       setState(() {
         var extractdata = json.decode(res.body);
@@ -309,7 +295,7 @@ class _TabScreenState extends State<TabScreen> {
         fishlatitude: fishlatitude,
         fishlongitude: fishlongitude,
         fishrating: fishrating);
-    print(data);
+    //print(data);
 
     Navigator.push(context,
         SlideRightRoute(page: FishDetail(fish: fish, user: widget.user)));

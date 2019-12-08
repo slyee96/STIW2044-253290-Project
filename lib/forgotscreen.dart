@@ -103,7 +103,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       pr.style(message: "Sending link to your email.");
       pr.show();
       http.post(urlPass, body: {
-        "Email": _email,
+        "email": _email,
       }).then((res) {
         print(res.statusCode);
         Toast.show(res.body, context,

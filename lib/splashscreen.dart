@@ -3,7 +3,6 @@ import 'package:project_mynelayan/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
-import 'loginscreen.dart';
 import 'mainscreen.dart';
 
 String _email, _password;
@@ -13,6 +12,8 @@ void main() => runApp(SplashScreen());
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.orange));
     return MaterialApp(
       theme: new ThemeData(primarySwatch: Colors.orange),
       debugShowCheckedModeBanner: false,
@@ -58,10 +59,8 @@ class _ProgressIndicatorState extends State<ProgressIndicator>
       ..addListener(() {
         setState(() {
           if (animation.value > 0.99) {
-            if (animation.value > 0.99) {
-              //print('Sucess Login');
-              loadpref(this.context);
-            }
+            //print('Sucess Login');
+            loadpref(this.context);
           }
         });
       });
@@ -105,7 +104,6 @@ class _ProgressIndicatorState extends State<ProgressIndicator>
           name: "not register",
           email: "user@noregister",
           phone: "not register",
-          radius: "15",
           wallet: "0",
           rating: "0");
       Navigator.push(
@@ -119,8 +117,8 @@ class _ProgressIndicatorState extends State<ProgressIndicator>
 
   void _onLogin(String email, String password, ctx) {
     http.post(urlLogin, body: {
-      "Email": _email,
-      "Password": _password,
+      "email": _email,
+      "password": _password,
     }).then((res) {
       print(res.statusCode);
       var string = res.body;
@@ -132,7 +130,6 @@ class _ProgressIndicatorState extends State<ProgressIndicator>
             name: dres[1],
             email: dres[2],
             phone: dres[3],
-            radius: dres[6],
             wallet: dres[7],
             rating: dres[8]);
         Navigator.push(ctx,
@@ -143,7 +140,6 @@ class _ProgressIndicatorState extends State<ProgressIndicator>
             name: "not register",
             email: "user@noregister",
             phone: "not register",
-            radius: "15",
             wallet: "0",
             rating: "0");
         Navigator.push(ctx,

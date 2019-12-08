@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:progress_dialog/progress_dialog.dart';
 import 'loginscreen.dart';
 import 'registerscreen.dart';
 import 'splashscreen.dart';
@@ -14,7 +13,6 @@ import 'package:flutter/services.dart';
 import 'dart:io';
 import 'dart:math';
 import 'package:geolocator/geolocator.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 String urlgetuser = "http://myondb.com/myNelayanLY/php/get_user.php";
 String urluploadImage =
@@ -268,7 +266,7 @@ class _TabScreen4State extends State<TabScreen4> {
                 String base64Image = base64Encode(_image.readAsBytesSync());
                 http.post(urluploadImage, body: {
                   "encoded_string": base64Image,
-                  "Email": widget.user.email,
+                  "email": widget.user.email,
                 }).then((res) {
                   print(res.body);
                   if (res.body == "success") {
@@ -327,8 +325,8 @@ class _TabScreen4State extends State<TabScreen4> {
                   return;
                 }
                 http.post(urlupdate, body: {
-                  "Email": widget.user.email,
-                  "Name": nameController.text,
+                  "email": widget.user.email,
+                  "name": nameController.text,
                 }).then((res) {
                   var string = res.body;
                   List dres = string.split(",");
@@ -393,8 +391,8 @@ class _TabScreen4State extends State<TabScreen4> {
                   return;
                 }
                 http.post(urlupdate, body: {
-                  "Email": widget.user.email,
-                  "Password": passController.text,
+                  "email": widget.user.email,
+                  "password": passController.text,
                 }).then((res) {
                   var string = res.body;
                   List dres = string.split(",");
@@ -465,8 +463,8 @@ class _TabScreen4State extends State<TabScreen4> {
                   return;
                 }
                 http.post(urlupdate, body: {
-                  "Email": widget.user.email,
-                  "Phone": phoneController.text,
+                  "email": widget.user.email,
+                  "phone": phoneController.text,
                 }).then((res) {
                   var string = res.body;
                   List dres = string.split(",");

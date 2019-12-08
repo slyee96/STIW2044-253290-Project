@@ -217,9 +217,9 @@ class _DetailInterfaceState extends State<DetailInterface> {
     pr.style(message: "Accepting fish");
     pr.show();
     http.post(urlLoadJobs, body: {
-      "FishID": widget.fish.fishID,
-      "Email": widget.user.email,
-      "Wallet": widget.user.wallet,
+      "fishid": widget.fish.fishID,
+      "email": widget.user.email,
+      "wallet": widget.user.wallet,
     }).then((res) {
       print(res.body);
       if (res.body == "success") {
@@ -242,7 +242,7 @@ class _DetailInterfaceState extends State<DetailInterface> {
   void _onLogin(String email, BuildContext ctx) {
     String urlgetuser = "http://myondb.com/myNelayanLY/php/get_user.php";
     http.post(urlgetuser, body: {
-      "Email": email,
+      "email": email,
     }).then((res) {
       print(res.statusCode);
       var string = res.body;
@@ -250,7 +250,7 @@ class _DetailInterfaceState extends State<DetailInterface> {
       print(dres);
       if (dres[0] == "success") {
         User user = new User(
-            name: dres[1], email: dres[2], phone: dres[3], wallet: dres[7]);
+            name: dres[1], email: dres[2], phone: dres[3], wallet: dres[4]);
         Navigator.push(ctx,
             MaterialPageRoute(builder: (context) => MainScreen(user: user)));
       }

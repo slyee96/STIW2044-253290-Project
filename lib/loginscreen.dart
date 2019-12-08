@@ -172,8 +172,8 @@ class _LoginPageState extends State<LoginPage> {
       pr.style(message: "Login in");
       pr.show();
       http.post(urlLogin, body: {
-        "Email": _email,
-        "Password": _password,
+        "email": _email,
+        "password": _password,
       }).then((res) {
         print(res.statusCode);
         var string = res.body;
@@ -183,13 +183,11 @@ class _LoginPageState extends State<LoginPage> {
             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
         if (dres[0] == "success") {
           pr.dismiss();
-          print("Radius:");
           print(dres);
           User user = new User(
               name: dres[1],
               email: dres[2],
               phone: dres[3],
-              radius: dres[6],
               wallet: dres[7],
               rating: dres[8]);
           Navigator.push(context,
