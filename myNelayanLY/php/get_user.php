@@ -4,6 +4,7 @@ include_once("dbconnect.php");
 $email = $_POST['email'];
 
 $sql = "SELECT * FROM User WHERE Email = '$email'";
+echo $sql;
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result ->fetch_assoc()){

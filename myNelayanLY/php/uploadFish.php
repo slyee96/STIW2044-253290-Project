@@ -13,7 +13,7 @@ $decoded_string = base64_decode($encoded_string);
 $mydate =  date('dmYhis');
 $imagename = $mydate.'-'.$email;
 
-$sqlinsert = "INSERT INTO Fish(FishTittle,FishOwner,FishDescription,FishPrice,FishImage,Latitude,Longitude) VALUES ('$fishtitle','$email','$fishdescription','$fishprice','$imagename','$latitude','$longitude')";
+echo $sqlinsert = "INSERT INTO Fish(FishTittle,FishOwner,FishDescription,FishPrice,FishImage,Latitude,Longitude) VALUES ('$fishtitle','$email','$fishdescription','$fishprice','$imagename','$latitude','$longitude')";
 
 if ($wallet>0){
     if ($conn->query($sqlinsert) === TRUE) {

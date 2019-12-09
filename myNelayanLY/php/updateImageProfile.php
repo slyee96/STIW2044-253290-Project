@@ -1,6 +1,6 @@
 <?php
 //error_reporting(0);
-$email = $_POST['mmail'];
+$email = $_POST['email'];
 $encoded_string = $_POST["encoded_string"];
 $decoded_string = base64_decode($encoded_string);
 

@@ -2,10 +2,10 @@
 error_reporting(0);
 include_once("dbconnect.php");
 
-$name = $_POST['name'];
-$phone = $_POST['phone'];
 $email = $_POST['email'];
+$name = $_POST['name'];
 $password = $_POST['password'];
+$phone = $_POST['phone'];
 
 $usersql = "SELECT * FROM User WHERE Email = '$email'";
 
@@ -23,10 +23,10 @@ if ($conn->query($sql) === TRUE) {
     $result = $conn->query($usersql);
 if ($result->num_rows > 0) {
         while ($row = $result ->fetch_assoc()){
-        echo "success,".$row["Name"].",".$row["Phone"].",".$row["Email"].",".$row["Radius"].",".$row["Wallet"].",".$row["Rating"].",".$row["Date"];
+        echo "success,".$row["Name"].",".$row["Phone"].",".$row["Email"].",".$row["Wallet"].",".$row["Rating"].",".$row["date"];
         }
     }else{
-        echo "failed,null,null,null,null,null,null,null";
+        echo "failed,null,null,null,null,null,null";
     }
 } else {
     echo "error";
