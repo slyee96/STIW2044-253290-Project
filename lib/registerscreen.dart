@@ -136,7 +136,7 @@ class RegisterWidgetState extends State<RegisterWidget> {
                 _onChange(value);
               },
             ),
-            Text('I agree to myNelayan ', style: TextStyle(fontSize: 14)),
+            Text('I agree to myNelayan ', style: TextStyle(fontSize: 8)),
             GestureDetector(
                 child: Text("(Terms and Condition)",
                     style: TextStyle(
@@ -232,7 +232,7 @@ class RegisterWidgetState extends State<RegisterWidget> {
     _phone = _phcontroller.text;
     _email = _emcontroller.text;
     _password = _passcontroller.text;
-    print(_password);
+
     if ((_isEmailValid(_email)) &&
         (_password.length > 5) &&
         (_image != null) &&

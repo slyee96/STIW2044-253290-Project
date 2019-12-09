@@ -26,11 +26,11 @@ class _FishDetailState extends State<FishDetail> {
     return WillPopScope(
       onWillPop: _onBackPressAppBar,
       child: Scaffold(
-          backgroundColor: Colors.orange[300],
+          backgroundColor: Colors.orange[100],
           resizeToAvoidBottomPadding: false,
           appBar: AppBar(
             title: Text('Fish Details'),
-            backgroundColor: Colors.deepOrange,
+            backgroundColor: Colors.orange,
           ),
           body: SingleChildScrollView(
             child: Container(
@@ -113,7 +113,7 @@ class _DetailInterfaceState extends State<DetailInterface> {
                 TableRow(children: [
                   Text("Fish Description",
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(widget.fish.fishdescription),
+                  Text(""),
                 ]),
                 TableRow(children: [
                   Text("Fish Price",
@@ -211,12 +211,12 @@ class _DetailInterfaceState extends State<DetailInterface> {
   }
 
   Future<String> acceptRequest() async {
-    String urlLoadJobs = "http://myondb.com/myNelayanLY/php/accept_fish.php";
+    String urlLoadFish = "http://myondb.com/myNelayanLY/php/accept_fish.php";
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
     pr.style(message: "Accepting fish");
     pr.show();
-    http.post(urlLoadJobs, body: {
+    http.post(urlLoadFish, body: {
       "fishid": widget.fish.fishID,
       "email": widget.user.email,
       "wallet": widget.user.wallet,
@@ -250,7 +250,11 @@ class _DetailInterfaceState extends State<DetailInterface> {
       print(dres);
       if (dres[0] == "success") {
         User user = new User(
-            name: dres[1], email: dres[2], phone: dres[3], wallet: dres[4]);
+            name: dres[1],
+            phone: dres[2],
+            email: dres[3],
+            wallet: dres[7],
+            rating: dres[8]);
         Navigator.push(ctx,
             MaterialPageRoute(builder: (context) => MainScreen(user: user)));
       }

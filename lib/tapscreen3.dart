@@ -120,7 +120,7 @@ class _TabScreen3State extends State<TabScreen3> {
                                                 Flexible(
                                                   child: Text("You have " +
                                                       widget.user.wallet +
-                                                      " Wallet"),
+                                                      " coins (Wallet)"),
                                                 ),
                                               ],
                                             ),
@@ -181,7 +181,7 @@ class _TabScreen3State extends State<TabScreen3> {
                                         image: DecorationImage(
                                             fit: BoxFit.fill,
                                             image: NetworkImage(
-                                                "http://myondb.com/myNelayanLY/images/${data[index]['fishimage']}.jpg")))),
+                                                  "http://myondb.com/myNelayanLY/images/${data[index]['fishimage']}.jpg")))),
                                 Expanded(
                                   child: Container(
                                     child: Column(

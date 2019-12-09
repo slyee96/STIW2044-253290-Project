@@ -186,8 +186,8 @@ class _LoginPageState extends State<LoginPage> {
           print(dres);
           User user = new User(
               name: dres[1],
-              email: dres[2],
-              phone: dres[3],
+              phone: dres[2],
+              email: dres[3],
               wallet: dres[7],
               rating: dres[8]);
           Navigator.push(context,

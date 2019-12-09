@@ -2,25 +2,24 @@ class Fish {
   String fishID,
       fishtitle,
       fishowner,
-      fishdescription,
+      fishdes,
       fishprice,
       fishtime,
       fishimage,
       fishaccepted,
       fishlatitude,
-      fishlongitude,
-      fishrating;
+      fishlongitude;
 
-  Fish(
-      {this.fishID,
-      this.fishtitle,
-      this.fishowner,
-      this.fishdescription,
-      this.fishprice,
-      this.fishtime,
-      this.fishimage,
-      this.fishaccepted,
-      this.fishlatitude,
-      this.fishlongitude,
-      this.fishrating});
+  Fish({
+    this.fishID,
+    this.fishtitle,
+    this.fishowner,
+    this.fishdes,
+    this.fishprice,
+    this.fishtime,
+    this.fishimage,
+    this.fishaccepted,
+    this.fishlatitude,
+    this.fishlongitude,
+  });
 }

@@ -9,6 +9,7 @@ import 'dart:convert';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
+import 'package:toast/toast.dart';
 
 double perpage = 1;
 
@@ -119,7 +120,7 @@ class _TabScreenState extends State<TabScreen> {
                                               Flexible(
                                                 child: Text("You have " +
                                                     widget.user.wallet +
-                                                    " Wallet"),
+                                                    " coins (Wallet)"),
                                               ),
                                             ],
                                           ),
@@ -171,18 +172,19 @@ class _TabScreenState extends State<TabScreen> {
                             data[index]['fishID'],
                             data[index]['fishtitle'],
                             data[index]['fishowner'],
-                            data[index]['fishdescription'],
+                            data[index]['fishdes'],
                             data[index]['fishprice'],
                             data[index]['fishtime'],
                             data[index]['fishimage'],
                             data[index]['fishaccepted'],
                             data[index]['fishlatitude'],
                             data[index]['fishlongitude'],
-                            data[index]['fishrating'],
                             widget.user.email,
                             widget.user.name,
                             widget.user.wallet),
-                        onLongPress: _onFishDelete,
+                        onLongPress: () => _onFishDelete(
+                            data[index]['fishid'].toString(),
+                            data[index]['fishtitle'].toString()),
                         child: Padding(
                           padding: const EdgeInsets.all(2.0),
                           child: Row(
@@ -272,37 +274,37 @@ class _TabScreenState extends State<TabScreen> {
       String fishID,
       String fishtitle,
       String fishowner,
-      String fishdescription,
+      String fishdes,
       String fishprice,
       String fishtime,
       String fishimage,
       String fishaccepted,
       String fishlatitude,
       String fishlongitude,
-      String fishrating,
       String email,
       String name,
       String wallet) {
     Fish fish = new Fish(
-        fishID: fishID,
-        fishtitle: fishtitle,
-        fishowner: fishowner,
-        fishdescription: fishdescription,
-        fishprice: fishprice,
-        fishtime: fishtime,
-        fishimage: fishimage,
-        fishaccepted: null,
-        fishlatitude: fishlatitude,
-        fishlongitude: fishlongitude,
-        fishrating: fishrating);
+      fishID: fishID,
+      fishtitle: fishtitle,
+      fishowner: fishowner,
+      fishdes: fishdes,
+      fishprice: fishprice,
+      fishtime: fishtime,
+      fishimage: fishimage,
+      fishaccepted: null,
+      fishlatitude: fishlatitude,
+      fishlongitude: fishlongitude,
+    );
     //print(data);
 
     Navigator.push(context,
         SlideRightRoute(page: FishDetail(fish: fish, user: widget.user)));
   }
 
-  void _onFishDelete() {
-    print("Delete");
+  void _onFishDelete(String fishID, String fishtitle) {
+    print("Delete " + fishID);
+    _showDialog(fishID, fishtitle);
   }
 
   void _getCurrentLocation() {
@@ -334,5 +336,30 @@ class _TabScreenState extends State<TabScreen> {
     } catch (e) {
       print(e);
     }
+  }
+
+  void _showDialog(String fishID, String fishtitle) {
+    String urlLoadJobs = "http://myondb.com/myNelayanLY/php/delete_fish.php";
+    ProgressDialog pr = new ProgressDialog(context,
+        type: ProgressDialogType.Normal, isDismissible: false);
+    pr.style(message: "Deleting Fish");
+    pr.show();
+    http.post(urlLoadJobs, body: {
+      "fishid": fishID,
+    }).then((res) {
+      print(res.body);
+      if (res.body == "success") {
+        Toast.show("Success", context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+        init();
+      } else {
+        Toast.show("Failed", context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      }
+    }).catchError((err) {
+      print(err);
+      pr.dismiss();
+    });
+    return null;
   }
 }

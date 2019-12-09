@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:project_mynelayan/payment.dart';
 import 'dart:convert';
 import 'loginscreen.dart';
 import 'registerscreen.dart';
@@ -13,6 +14,8 @@ import 'package:flutter/services.dart';
 import 'dart:io';
 import 'dart:math';
 import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
+import 'package:random_string/random_string.dart';
 
 String urlgetuser = "http://myondb.com/myNelayanLY/php/get_user.php";
 String urluploadImage =
@@ -20,6 +23,7 @@ String urluploadImage =
 String urlupdate = "http://myondb.com/myNelayanLY/php/updateProfile.php";
 File _image;
 int number = 0;
+String _value;
 
 class TabScreen4 extends StatefulWidget {
   final User user;
@@ -124,8 +128,8 @@ class _TabScreen4State extends State<TabScreen4> {
                                     Flexible(
                                       child: Text("You have " +
                                               widget.user.wallet +
-                                              " Wallet" ??
-                                          "You have 0 Wallet"),
+                                              " coins (Wallet)" ??
+                                          "You have 0 coin Wallet"),
                                     ),
                                   ],
                                 ),
@@ -189,7 +193,7 @@ class _TabScreen4State extends State<TabScreen4> {
                       ),
                       MaterialButton(
                         onPressed: _gotoWallet,
-                        child: Text("Wallet"),
+                        child: Text("Add Coins"),
                       ),
                       MaterialButton(
                         onPressed: _registerAccount,
@@ -315,6 +319,7 @@ class _TabScreen4State extends State<TabScreen4> {
                 icon: Icon(Icons.person),
               )),
           actions: <Widget>[
+            // usually buttons at the bottom of the dialog
             new FlatButton(
               child: new Text("Yes"),
               onPressed: () {
@@ -382,6 +387,7 @@ class _TabScreen4State extends State<TabScreen4> {
             obscureText: true,
           ),
           actions: <Widget>[
+            // usually buttons at the bottom of the dialog
             new FlatButton(
               child: new Text("Yes"),
               onPressed: () {
@@ -454,6 +460,7 @@ class _TabScreen4State extends State<TabScreen4> {
                 icon: Icon(Icons.phone),
               )),
           actions: <Widget>[
+            // usually buttons at the bottom of the dialog
             new FlatButton(
               child: new Text("Yes"),
               onPressed: () {
@@ -581,5 +588,89 @@ class _TabScreen4State extends State<TabScreen4> {
 
   void _gotoWallet() {
     print('Wallet');
+    if (widget.user.name == "not register") {
+      Toast.show("Not allowed please register", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      return;
+    }
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Buy Coins?"),
+          content: Container(
+            height: 100,
+            child: DropdownExample(),
+          ),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Yes"),
+              onPressed: () async {
+                Navigator.of(context).pop();
+                var now = new DateTime.now();
+                var formatter = new DateFormat('ddMMyyyyhhmmss-');
+                String formatted =
+                    formatter.format(now) + randomAlphaNumeric(10);
+                print(formatted);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PaymentScreen(
+                            user: widget.user,
+                            orderid: formatted,
+                            val: _value)));
+              },
+            ),
+            new FlatButton(
+              child: new Text("No"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class DropdownExample extends StatefulWidget {
+  @override
+  _DropdownExampleState createState() {
+    return _DropdownExampleState();
+  }
+}
+
+class _DropdownExampleState extends State<DropdownExample> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: DropdownButton<String>(
+        items: [
+          DropdownMenuItem<String>(
+            child: Text('50 Coins (RM10)'),
+            value: '10',
+          ),
+          DropdownMenuItem<String>(
+            child: Text('100 Coins (RM20)'),
+            value: '20',
+          ),
+          DropdownMenuItem<String>(
+            child: Text('150 Coins (RM30)'),
+            value: '30',
+          ),
+        ],
+        onChanged: (String value) {
+          setState(() {
+            _value = value;
+          });
+        },
+        hint: Text('Select Coin'),
+        value: _value,
+      ),
+    );
   }
 }

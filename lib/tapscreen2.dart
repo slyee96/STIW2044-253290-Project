@@ -132,7 +132,7 @@ class _TabScreen2State extends State<TabScreen2> {
                                                 Flexible(
                                                   child: Text("You have " +
                                                       widget.user.wallet +
-                                                      " Wallet"),
+                                                      " coins (Wallet)"),
                                                 ),
                                               ],
                                             ),
@@ -198,7 +198,7 @@ class _TabScreen2State extends State<TabScreen2> {
                                           image: DecorationImage(
                                               fit: BoxFit.fill,
                                               image: NetworkImage(
-                                                  "http://myondb.com/myhelper/images/${data[index]['fishimage']}.jpg")))),
+                                                  "http://myondb.com/myNelayanLY/images/${data[index]['fishimage']}.jpg")))),
                                   Expanded(
                                     child: Container(
                                       child: Column(
@@ -360,7 +360,7 @@ class _TabScreen2State extends State<TabScreen2> {
   }
 
   Future<String> deleteRequest(String fishID) async {
-    String urlLoadJobs = "http://myondb.com/myhelper/php/delete_fish.php";
+    String urlLoadJobs = "http://myondb.com/myNelayanLY/php/delete_fish.php";
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
     pr.style(message: "Deleting Fish");
