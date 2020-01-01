@@ -23,10 +23,10 @@ if ($conn->query($sql) === TRUE) {
     $result = $conn->query($usersql);
 if ($result->num_rows > 0) {
         while ($row = $result ->fetch_assoc()){
-        echo "success,".$row["Name"].",".$row["Phone"].",".$row["Email"].",".$row["Wallet"].",".$row["Rating"].",".$row["date"];
+        echo "success,".$row["Name"].",".$row["Phone"].",".$row["Email"].",".$row["Credit"].",".$row["Date"];
         }
     }else{
-        echo "failed,null,null,null,null,null,null";
+    echo "failed,null,null,null,null,null";
     }
 } else {
     echo "error";

@@ -1,5 +1,5 @@
 class Fish {
-  String fishID,
+  String fishid,
       fishtitle,
       fishowner,
       fishdes,
@@ -11,7 +11,7 @@ class Fish {
       fishlongitude;
 
   Fish({
-    this.fishID,
+    this.fishid,
     this.fishtitle,
     this.fishowner,
     this.fishdes,

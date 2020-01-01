@@ -3,13 +3,13 @@ error_reporting(0);
 include_once("dbconnect.php");
 $fishid = $_POST['fishid'];
 $email = $_POST['email'];
-$wallet = $_POST['wallet'];
+$credit = $_POST['credit'];
 
-$sql = "UPDATE Fish SET FishAccepted = '$email'  WHERE FishID = '$fishid'";
+$sql = "UPDATE FISH SET FISHACCEPTED = '$email' WHERE FISHID = '$fishid'";
 if ($conn->query($sql) === TRUE) {
-    $newwallet = $wallet - 1;
-    $sqlwallet = "UPDATE User SET Wallet = '$newwallet' WHERE Email = '$email'";
-    $conn->query($sqlwallet);
+    $newcredit = $credit - 1;
+    $sqlcredit = "UPDATE User SET Credit = '$newcredit' WHERE Email = '$email'";
+    $conn->query($sqlcredit);
     echo "success";
 } else {
     echo "error";

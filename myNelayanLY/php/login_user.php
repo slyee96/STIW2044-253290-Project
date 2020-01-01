@@ -9,8 +9,8 @@ $sql = "SELECT * FROM User WHERE Email = '$email' AND Password = '$passwordsha' 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result ->fetch_assoc()){
-        echo "success,".$row["Name"].",".$row["Phone"].",".$row["Email"].",".$row["Password"].",".$row["Date"].",".$row["Verify"].",".$row["Wallet"].",".$row["Rating"];
+        echo "success,".$row["Name"].",".$row["Phone"].",".$row["Email"].",".$row["Credit"].",".$row["Date"];
     }
 }else{
-    echo "failed,null,null,null,null,null,null,null";
+    echo "failed,null,null,null,null,null";
 }

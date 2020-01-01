@@ -210,8 +210,28 @@ class RegisterWidgetState extends State<RegisterWidget> {
   }
 
   void _choose() async {
-    _image = await ImagePicker.pickImage(source: ImageSource.camera);
-    setState(() {});
+    final imageSource = await showDialog<ImageSource>(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text("Select the image source"),
+              actions: <Widget>[
+                MaterialButton(
+                  child: Text("Camera"),
+                  onPressed: () => Navigator.pop(context, ImageSource.camera),
+                ),
+                MaterialButton(
+                  child: Text("Gallery"),
+                  onPressed: () => Navigator.pop(context, ImageSource.gallery),
+                )
+              ],
+            ));
+
+    if (imageSource != null) {
+      final file = await ImagePicker.pickImage(source: imageSource);
+      if (file != null) {
+        setState(() => _image = file);
+      }
+    }
   }
 
   void _onRegister() {
@@ -251,21 +271,17 @@ class RegisterWidgetState extends State<RegisterWidget> {
         "password": _password,
       }).then((res) {
         print(res.statusCode);
-        if (res.body == "success") {
-          Toast.show(res.body, context,
-              duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-          _image = null;
-          savepref(_email, _password);
-          _namecontroller.text = '';
-          _phcontroller.text = '';
-          _emcontroller.text = '';
-          _passcontroller.text = '';
-          pr.dismiss();
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => LoginPage()));
-        }
+        Toast.show(res.body, context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+        _image = null;
+        savepref(_email, _password);
+        _namecontroller.text = '';
+        _phcontroller.text = '';
+        _emcontroller.text = '';
+        _passcontroller.text = '';
+        pr.dismiss();
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (BuildContext context) => LoginPage()));
       }).catchError((err) {
         print(err);
       });

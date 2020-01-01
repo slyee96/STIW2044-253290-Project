@@ -163,9 +163,28 @@ class _CreateNewJobState extends State<CreateNewJob> {
   }
 
   void _choose() async {
-    _image =
-        await ImagePicker.pickImage(source: ImageSource.camera, maxHeight: 400);
-    setState(() {});
+    final imageSource = await showDialog<ImageSource>(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text("Select the image source"),
+              actions: <Widget>[
+                MaterialButton(
+                  child: Text("Camera"),
+                  onPressed: () => Navigator.pop(context, ImageSource.camera),
+                ),
+                MaterialButton(
+                  child: Text("Gallery"),
+                  onPressed: () => Navigator.pop(context, ImageSource.gallery),
+                )
+              ],
+            ));
+
+    if (imageSource != null) {
+      final file = await ImagePicker.pickImage(source: imageSource);
+      if (file != null) {
+        setState(() => _image = file);
+      }
+    }
   }
 
   void _loadmap() async {
@@ -211,7 +230,7 @@ class _CreateNewJobState extends State<CreateNewJob> {
       "fishprice": _pricecontroller.text,
       "latitude": _currentPosition.latitude.toString(),
       "longitude": _currentPosition.longitude.toString(),
-      "wallet": widget.user.wallet,
+      "credit": widget.user.credit,
     }).then((res) {
       print(urlUpload);
       Toast.show(res.body, context,
@@ -245,11 +264,7 @@ class _CreateNewJobState extends State<CreateNewJob> {
       print(dres);
       if (dres[0] == "success") {
         User user = new User(
-            name: dres[1],
-            phone: dres[2],
-            email: dres[3],
-            wallet: dres[7],
-            rating: dres[8]);
+            name: dres[1], phone: dres[2], email: dres[3], credit: dres[4]);
         Navigator.push(ctx,
             MaterialPageRoute(builder: (context) => MainScreen(user: user)));
       }
@@ -258,13 +273,13 @@ class _CreateNewJobState extends State<CreateNewJob> {
     });
   }
 
-  void _getCurrentLocation() async {
+  _getCurrentLocation() async {
     geolocator
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
         .then((Position position) {
       setState(() {
         _currentPosition = position;
-        // print(_getCurrentLocation);
+        print(_getCurrentLocation);
       });
 
       _getAddressFromLatLng();
@@ -273,7 +288,7 @@ class _CreateNewJobState extends State<CreateNewJob> {
     });
   }
 
-  void _getAddressFromLatLng() async {
+  _getAddressFromLatLng() async {
     try {
       List<Placemark> p = await geolocator.placemarkFromCoordinates(
           _currentPosition.latitude, _currentPosition.longitude);

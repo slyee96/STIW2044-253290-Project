@@ -1,11 +1,5 @@
 class User {
-  String name, email, phone, radius, wallet, rating, datereg;
+  String name, phone, email, credit, datereg;
 
-  User(
-      {this.name,
-      this.email,
-      this.phone,
-      this.wallet,
-      this.rating,
-      this.datereg});
+  User({this.name, this.phone, this.email, this.credit, this.datereg});
 }

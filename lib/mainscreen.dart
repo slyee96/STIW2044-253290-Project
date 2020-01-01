@@ -37,41 +37,37 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Scaffold(
-        backgroundColor: Colors.orange[100],
-        resizeToAvoidBottomPadding: false,
-        appBar: AppBar(
-          title: Text('Main Page'),
-        ),
-        body: tabs[currentTabIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: onTapped,
-          currentIndex: currentTabIndex,
-          //backgroundColor: Colors.blueGrey,
-          type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              title: Text("Fish"),
+      body: tabs[currentTabIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: onTapped,
+        currentIndex: currentTabIndex,
+        //backgroundColor: Colors.blueGrey,
+        type: BottomNavigationBarType.fixed,
+
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            title: Text("Search"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.list,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.list,
-              ),
-              title: Text("Posted Fish"),
+            title: Text("Posted Fish"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.event,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.event),
-              title: Text("Order Fish"),
+            title: Text("Order Fish"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-              ),
-              title: Text("Account"),
-            )
-          ],
-        ),
+            title: Text("Account"),
+          )
+        ],
       ),
     );
   }

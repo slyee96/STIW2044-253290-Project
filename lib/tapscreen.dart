@@ -10,6 +10,7 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
 import 'package:toast/toast.dart';
+import 'enterexit.dart';
 
 double perpage = 1;
 
@@ -42,6 +43,10 @@ class _TabScreenState extends State<TabScreen> {
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.orange[100],
+        appBar: AppBar(
+          title: Text('Search'),
+          backgroundColor: Colors.orange,
+        ),
         body: RefreshIndicator(
             key: refreshKey,
             color: Colors.orange,
@@ -119,7 +124,7 @@ class _TabScreenState extends State<TabScreen> {
                                               ),
                                               Flexible(
                                                 child: Text("You have " +
-                                                    widget.user.wallet +
+                                                    widget.user.credit +
                                                     " coins (Wallet)"),
                                               ),
                                             ],
@@ -169,7 +174,7 @@ class _TabScreenState extends State<TabScreen> {
                       elevation: 2,
                       child: InkWell(
                         onTap: () => _onFishDetail(
-                            data[index]['fishID'],
+                            data[index]['fishid'],
                             data[index]['fishtitle'],
                             data[index]['fishowner'],
                             data[index]['fishdes'],
@@ -180,8 +185,7 @@ class _TabScreenState extends State<TabScreen> {
                             data[index]['fishlatitude'],
                             data[index]['fishlongitude'],
                             widget.user.email,
-                            widget.user.name,
-                            widget.user.wallet),
+                            widget.user.credit),
                         onLongPress: () => _onFishDelete(
                             data[index]['fishid'].toString(),
                             data[index]['fishtitle'].toString()),
@@ -271,7 +275,7 @@ class _TabScreenState extends State<TabScreen> {
   }
 
   void _onFishDetail(
-      String fishID,
+      String fishid,
       String fishtitle,
       String fishowner,
       String fishdes,
@@ -282,10 +286,9 @@ class _TabScreenState extends State<TabScreen> {
       String fishlatitude,
       String fishlongitude,
       String email,
-      String name,
       String wallet) {
     Fish fish = new Fish(
-      fishID: fishID,
+      fishid: fishid,
       fishtitle: fishtitle,
       fishowner: fishowner,
       fishdes: fishdes,
@@ -302,9 +305,9 @@ class _TabScreenState extends State<TabScreen> {
         SlideRightRoute(page: FishDetail(fish: fish, user: widget.user)));
   }
 
-  void _onFishDelete(String fishID, String fishtitle) {
-    print("Delete " + fishID);
-    _showDialog(fishID, fishtitle);
+  void _onFishDelete(String fishid, String fishtitle) {
+    print("Delete " + fishid);
+    _showDialog(fishid, fishtitle);
   }
 
   void _getCurrentLocation() {
@@ -338,14 +341,14 @@ class _TabScreenState extends State<TabScreen> {
     }
   }
 
-  void _showDialog(String fishID, String fishtitle) {
+  void _showDialog(String fishid, String fishtitle) {
     String urlLoadJobs = "http://myondb.com/myNelayanLY/php/delete_fish.php";
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
     pr.style(message: "Deleting Fish");
     pr.show();
     http.post(urlLoadJobs, body: {
-      "fishid": fishID,
+      "fishid": fishid,
     }).then((res) {
       print(res.body);
       if (res.body == "success") {

@@ -54,6 +54,10 @@ class _TabScreen4State extends State<TabScreen4> {
       home: Scaffold(
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.orange[100],
+        appBar: AppBar(
+          title: Text('Profile'),
+          backgroundColor: Colors.orange,
+        ),
         body: ListView.builder(
             itemCount: 5,
             itemBuilder: (context, index) {
@@ -127,7 +131,7 @@ class _TabScreen4State extends State<TabScreen4> {
                                     ),
                                     Flexible(
                                       child: Text("You have " +
-                                              widget.user.wallet +
+                                              widget.user.credit +
                                               " coins (Wallet)" ??
                                           "You have 0 coin Wallet"),
                                     ),
@@ -311,7 +315,7 @@ class _TabScreen4State extends State<TabScreen4> {
       builder: (BuildContext context) {
         // return object of type Dialog
         return AlertDialog(
-          title: new Text("Change " + widget.user.name),
+          title: new Text("Change name for " + widget.user.name + "?"),
           content: new TextField(
               controller: nameController,
               decoration: InputDecoration(
@@ -339,16 +343,17 @@ class _TabScreen4State extends State<TabScreen4> {
                     print('in success');
                     setState(() {
                       widget.user.name = dres[1];
-                      if (dres[0] == "success") {
-                        print("in setstate");
-                        widget.user.name = dres[1];
-                      }
                     });
+                    Toast.show("Success", context,
+                        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                    Navigator.of(context).pop();
+                    return;
                   } else {}
                 }).catchError((err) {
                   print(err);
                 });
-                Navigator.of(context).pop();
+                Toast.show("Failed", context,
+                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               },
             ),
             new FlatButton(
@@ -668,7 +673,7 @@ class _DropdownExampleState extends State<DropdownExample> {
             _value = value;
           });
         },
-        hint: Text('Select Coin'),
+        hint: Text('Select COINS'),
         value: _value,
       ),
     );

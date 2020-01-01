@@ -166,7 +166,7 @@ class _DetailInterfaceState extends State<DetailInterface> {
 
   void _onAcceptFish() {
     if (widget.user.email == "user@noregister") {
-      Toast.show("Please register to view Fish cart", context,
+      Toast.show("Please register to view accept jobs", context,
           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       return;
     } else {
@@ -177,8 +177,8 @@ class _DetailInterfaceState extends State<DetailInterface> {
 
   void _showDialog() {
     // flutter defined function
-    if (int.parse(widget.user.wallet) < 1) {
-      Toast.show("Wallet not enough ", context,
+    if (int.parse(widget.user.credit) < 1) {
+      Toast.show("Credit not enough ", context,
           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       return;
     }
@@ -211,15 +211,15 @@ class _DetailInterfaceState extends State<DetailInterface> {
   }
 
   Future<String> acceptRequest() async {
-    String urlLoadFish = "http://myondb.com/myNelayanLY/php/accept_fish.php";
+    String urlacceptFish = "http://myondb.com/myNelayanLY/php/accept_fish.php";
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
     pr.style(message: "Accepting fish");
     pr.show();
-    http.post(urlLoadFish, body: {
-      "fishid": widget.fish.fishID,
+    http.post(urlacceptFish, body: {
+      "fishid": widget.fish.fishid,
       "email": widget.user.email,
-      "wallet": widget.user.wallet,
+      "credit": widget.user.credit,
     }).then((res) {
       print(res.body);
       if (res.body == "success") {
@@ -250,11 +250,7 @@ class _DetailInterfaceState extends State<DetailInterface> {
       print(dres);
       if (dres[0] == "success") {
         User user = new User(
-            name: dres[1],
-            phone: dres[2],
-            email: dres[3],
-            wallet: dres[7],
-            rating: dres[8]);
+            name: dres[1], phone: dres[2], email: dres[3], credit: dres[4]);
         Navigator.push(ctx,
             MaterialPageRoute(builder: (context) => MainScreen(user: user)));
       }

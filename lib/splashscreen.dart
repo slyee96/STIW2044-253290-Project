@@ -104,8 +104,7 @@ class _ProgressIndicatorState extends State<ProgressIndicator>
           name: "not register",
           email: "user@noregister",
           phone: "not register",
-          wallet: "0",
-          rating: "0");
+          credit: "0");
       Navigator.push(
           ctx, MaterialPageRoute(builder: (context) => MainScreen(user: user)));
     }
@@ -127,11 +126,7 @@ class _ProgressIndicatorState extends State<ProgressIndicator>
       print(dres);
       if (dres[0] == "success") {
         User user = new User(
-            name: dres[1],
-            phone: dres[2],
-            email: dres[3],
-            wallet: dres[7],
-            rating: dres[8]);
+            name: dres[1], phone: dres[2], email: dres[3], credit: dres[4]);
         Navigator.push(ctx,
             MaterialPageRoute(builder: (context) => MainScreen(user: user)));
       } else {
@@ -140,8 +135,7 @@ class _ProgressIndicatorState extends State<ProgressIndicator>
             name: "not register",
             email: "user@noregister",
             phone: "not register",
-            wallet: "0",
-            rating: "0");
+            credit: "0");
         Navigator.push(ctx,
             MaterialPageRoute(builder: (context) => MainScreen(user: user)));
       }

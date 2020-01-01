@@ -8,26 +8,26 @@ $fishprice = $_POST['fishprice'];
 $latitude = $_POST['latitude'];
 $longitude = $_POST['longitude'];
 $encoded_string = $_POST["encoded_string"];
-$wallet = $_POST['wallet'];
+$credit = $_POST['credit'];
 $decoded_string = base64_decode($encoded_string);
 $mydate =  date('dmYhis');
 $imagename = $mydate.'-'.$email;
 
-echo $sqlinsert = "INSERT INTO Fish(FishTittle,FishOwner,FishDescription,FishPrice,FishImage,Latitude,Longitude) VALUES ('$fishtitle','$email','$fishdescription','$fishprice','$imagename','$latitude','$longitude')";
+$sqlinsert = "INSERT INTO FISH(FISHTITLE,FISHOWNER,FISHDESCRIPTION,FISHPRICE,FISHIMAGE,LATITUDE,LONGITUDE) VALUES ('$fishtitle','$email','$fishdescription','$fishprice','$imagename','$latitude','$longitude')";
 
-if ($wallet>0){
+if ($credit>0){
     if ($conn->query($sqlinsert) === TRUE) {
         $path = '../images/'.$imagename.'.jpg';
         file_put_contents($path, $decoded_string);
-        $newwallet = $wallet - 1;
-        $sqlwallet = "UPDATE User SET Wallet = '$newwallet' WHERE Email = '$email'";
-        $conn->query($sqlwallet);
+        $newcredit = $credit - 1;
+        $sqlcredit = "UPDATE User SET Credit = '$newcredit' WHERE Email = '$email'";
+        $conn->query($sqlcredit);
         echo "success";
     } else {
         echo "failed";
     }
 }else{
-    echo "low wallet";
+    echo "low credit";
 }
 
 ?>

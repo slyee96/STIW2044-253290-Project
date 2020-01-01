@@ -42,6 +42,10 @@ class _TabScreen3State extends State<TabScreen3> {
         home: Scaffold(
             resizeToAvoidBottomPadding: false,
             backgroundColor: Colors.orange[100],
+            appBar: AppBar(
+              title: Text('My Accepted Fish'),
+              backgroundColor: Colors.orange,
+            ),
             body: RefreshIndicator(
               key: refreshKey,
               color: Color.fromRGBO(159, 30, 99, 1),
@@ -119,7 +123,7 @@ class _TabScreen3State extends State<TabScreen3> {
                                                 ),
                                                 Flexible(
                                                   child: Text("You have " +
-                                                      widget.user.wallet +
+                                                      widget.user.credit +
                                                       " coins (Wallet)"),
                                                 ),
                                               ],
@@ -181,7 +185,7 @@ class _TabScreen3State extends State<TabScreen3> {
                                         image: DecorationImage(
                                             fit: BoxFit.fill,
                                             image: NetworkImage(
-                                                  "http://myondb.com/myNelayanLY/images/${data[index]['fishimage']}.jpg")))),
+                                                "http://myondb.com/myNelayanLY/images/${data[index]['fishimage']}.jpg")))),
                                 Expanded(
                                   child: Container(
                                     child: Column(

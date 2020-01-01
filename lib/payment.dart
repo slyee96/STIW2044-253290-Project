@@ -21,35 +21,37 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: _onBackPressAppBar,
-        child: Scaffold(
-            appBar: AppBar(
-              title: Text('PAYMENT'),
-              backgroundColor: Colors.orange,
-            ),
-            body: Column(
-              children: <Widget>[
-                Expanded(
-                  child: WebView(
-                    initialUrl:
-                        'http://myondb.com/myNelayanLY/php/payment.php?email=' +
-                            widget.user.email +
-                            '&mobile=' +
-                            widget.user.phone +
-                            '&name=' +
-                            widget.user.name +
-                            '&amount=' +
-                            widget.val +
-                            '&orderid=' +
-                            widget.orderid,
-                    javascriptMode: JavascriptMode.unrestricted,
-                    onWebViewCreated: (WebViewController webViewController) {
-                      _controller.complete(webViewController);
-                    },
-                  ),
-                )
-              ],
-            )));
+      onWillPop: _onBackPressAppBar,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('PAYMENT'),
+          backgroundColor: Colors.deepOrange,
+        ),
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              child: WebView(
+                initialUrl:
+                    'http://myondb.com/myNelayanLY/php/payment.php?email=' +
+                        widget.user.email +
+                        '&mobile=' +
+                        widget.user.phone +
+                        '&name=' +
+                        widget.user.name +
+                        '&amount=' +
+                        widget.val +
+                        '&orderid=' +
+                        widget.orderid,
+                javascriptMode: JavascriptMode.unrestricted,
+                onWebViewCreated: (WebViewController webViewController) {
+                  _controller.complete(webViewController);
+                },
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   Future<bool> _onBackPressAppBar() async {
@@ -65,11 +67,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
       print(dres);
       if (dres[0] == "success") {
         User updateuser = new User(
-            name: dres[1],
-            phone: dres[2],
-            email: dres[3],
-            wallet: dres[7],
-            rating: dres[8]);
+            name: dres[1], phone: dres[2], email: dres[3], credit: dres[4]);
         Navigator.push(
             context,
             MaterialPageRoute(

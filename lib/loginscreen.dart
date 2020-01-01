@@ -185,11 +185,7 @@ class _LoginPageState extends State<LoginPage> {
           pr.dismiss();
           print(dres);
           User user = new User(
-              name: dres[1],
-              phone: dres[2],
-              email: dres[3],
-              wallet: dres[7],
-              rating: dres[8]);
+              name: dres[1], phone: dres[2], email: dres[3], credit: dres[4]);
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => MainScreen(user: user)));
         } else {

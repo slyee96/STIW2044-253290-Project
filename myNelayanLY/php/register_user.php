@@ -8,7 +8,7 @@ $password = sha1($_POST['password']);
 $encoded_string = $_POST["encoded_string"];
 $decoded_string = base64_decode($encoded_string);
 
-$sqlinsert = "INSERT INTO User(Name,Phone,Email,Password,Verify,Wallet,Rating) VALUES ('$name','$phone','$email','$password','0','100','5')";
+$sqlinsert = "INSERT INTO User(Name,Phone,Email,Password,Verify,Credit) VALUES ('$name','$phone','$email','$password','0','100')";
 if ($conn->query($sqlinsert) === TRUE) {
     $path = '../profile/'.$email.'.jpg';
     file_put_contents($path, $decoded_string);

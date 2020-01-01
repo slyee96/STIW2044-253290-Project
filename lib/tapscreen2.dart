@@ -46,6 +46,10 @@ class _TabScreen2State extends State<TabScreen2> {
         home: Scaffold(
             resizeToAvoidBottomPadding: false,
             backgroundColor: Colors.orange[100],
+            appBar: AppBar(
+              title: Text('Add New Fish'),
+              backgroundColor: Colors.orange,
+            ),
             floatingActionButton: FloatingActionButton(
               child: Icon(Icons.add),
               backgroundColor: Colors.orange,
@@ -131,7 +135,7 @@ class _TabScreen2State extends State<TabScreen2> {
                                                 ),
                                                 Flexible(
                                                   child: Text("You have " +
-                                                      widget.user.wallet +
+                                                      widget.user.credit +
                                                       " coins (Wallet)"),
                                                 ),
                                               ],
@@ -324,12 +328,12 @@ class _TabScreen2State extends State<TabScreen2> {
     }
   }
 
-  void _onFishDelete(String fishID, String fishtitle) {
-    print("Delete " + fishID);
-    _showDialog(fishID, fishtitle);
+  void _onFishDelete(String fishid, String fishtitle) {
+    print("Delete " + fishid);
+    _showDialog(fishid, fishtitle);
   }
 
-  void _showDialog(String fishID, String fishtitle) {
+  void _showDialog(String fishid, String fishtitle) {
     // flutter defined function
     showDialog(
       context: context,
@@ -344,7 +348,7 @@ class _TabScreen2State extends State<TabScreen2> {
               child: new Text("Yes"),
               onPressed: () {
                 Navigator.of(context).pop();
-                deleteRequest(fishID);
+                deleteRequest(fishid);
               },
             ),
             new FlatButton(
@@ -359,14 +363,14 @@ class _TabScreen2State extends State<TabScreen2> {
     );
   }
 
-  Future<String> deleteRequest(String fishID) async {
+  Future<String> deleteRequest(String fishid) async {
     String urlLoadJobs = "http://myondb.com/myNelayanLY/php/delete_fish.php";
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
     pr.style(message: "Deleting Fish");
     pr.show();
     http.post(urlLoadJobs, body: {
-      "fishid": fishID,
+      "fishid": fishid,
     }).then((res) {
       print(res.body);
       if (res.body == "success") {
