@@ -5,7 +5,7 @@ Project Assignment
 Sim Lai Yee (253290)
 
 # App Icon
-![](https://github.com/slyee96/STIW2044-253290-Project-myNelayan/blob/master/icon.png)
+![](https://github.com/slyee96/STIW2044-253290-Project-myNelayan/icon.png)
 
 # Project Description
 
