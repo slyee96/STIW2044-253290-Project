@@ -34,11 +34,11 @@ class _MainScreenState extends State<MainScreen> {
       body: tabs[currentTabIndex],
       bottomNavigationBar: FFNavigationBar(
         theme: FFNavigationBarTheme(
-          barBackgroundColor: Colors.orange,
+          barBackgroundColor: Colors.orange[50],
           selectedItemBorderColor: Colors.white,
           selectedItemBackgroundColor: Colors.orange,
           selectedItemIconColor: Colors.white,
-          selectedItemLabelColor: Colors.white,
+          selectedItemLabelColor: Colors.black,
         ),
         selectedIndex: currentTabIndex,
         onSelectTab: (index) {
