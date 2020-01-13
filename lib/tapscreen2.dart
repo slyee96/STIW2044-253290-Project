@@ -74,13 +74,6 @@ class _TabScreen2State extends State<TabScreen2> {
                             Stack(children: <Widget>[
                               Column(
                                 children: <Widget>[
-                                  Center(
-                                    child: Text("myNelayan",
-                                        style: TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.orange)),
-                                  ),
                                   SizedBox(height: 5),
                                   Container(
                                     width: 280,
@@ -136,7 +129,7 @@ class _TabScreen2State extends State<TabScreen2> {
                                                 Flexible(
                                                   child: Text("You have " +
                                                       widget.user.credit +
-                                                      " coins (Wallet)"),
+                                                      " coins (e-Wallet)"),
                                                 ),
                                               ],
                                             ),

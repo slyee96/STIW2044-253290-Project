@@ -111,11 +111,6 @@ class _DetailInterfaceState extends State<DetailInterface> {
               ),
               Table(children: [
                 TableRow(children: [
-                  Text("Fish Description",
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(""),
-                ]),
-                TableRow(children: [
                   Text("Fish Price",
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   Text("RM" + widget.fish.fishprice),

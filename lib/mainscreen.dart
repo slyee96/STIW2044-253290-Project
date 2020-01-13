@@ -4,6 +4,7 @@ import 'tapscreen2.dart';
 import 'tapscreen3.dart';
 import 'tapscreen4.dart';
 import 'user.dart';
+import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 
 class MainScreen extends StatefulWidget {
   final User user;
@@ -27,46 +28,41 @@ class _MainScreenState extends State<MainScreen> {
     ];
   }
 
-  String $pagetitle = "myNelayan";
-  onTapped(int index) {
-    setState(() {
-      currentTabIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: tabs[currentTabIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTapped,
-        currentIndex: currentTabIndex,
-        //backgroundColor: Colors.blueGrey,
-        type: BottomNavigationBarType.fixed,
-
+      bottomNavigationBar: FFNavigationBar(
+        theme: FFNavigationBarTheme(
+          barBackgroundColor: Colors.orange,
+          selectedItemBorderColor: Colors.white,
+          selectedItemBackgroundColor: Colors.orange,
+          selectedItemIconColor: Colors.white,
+          selectedItemLabelColor: Colors.white,
+        ),
+        selectedIndex: currentTabIndex,
+        onSelectTab: (index) {
+          setState(() {
+            currentTabIndex = index;
+          });
+        },
         items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            title: Text("Search"),
+          FFNavigationBarItem(
+            iconData: Icons.search,
+            label: 'Search',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.list,
-            ),
-            title: Text("Posted Fish"),
+          FFNavigationBarItem(
+            iconData: Icons.list,
+            label: 'Posted Fish',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.event,
-            ),
-            title: Text("Order Fish"),
+          FFNavigationBarItem(
+            iconData: Icons.event,
+            label: 'Order Fish',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-            ),
-            title: Text("Account"),
-          )
+          FFNavigationBarItem(
+            iconData: Icons.person,
+            label: 'Account',
+          ),
         ],
       ),
     );

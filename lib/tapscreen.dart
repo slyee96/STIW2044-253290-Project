@@ -63,8 +63,9 @@ class _TabScreenState extends State<TabScreen> {
                           Stack(children: <Widget>[
                             Column(
                               children: <Widget>[
+                                SizedBox(height: 5),
                                 Center(
-                                  child: Text("myNelayan",
+                                  child: Text("Welcome to MyNelayan",
                                       style: TextStyle(
                                           fontSize: 24,
                                           fontWeight: FontWeight.bold,
@@ -125,7 +126,7 @@ class _TabScreenState extends State<TabScreen> {
                                               Flexible(
                                                 child: Text("You have " +
                                                     widget.user.credit +
-                                                    " coins (Wallet)"),
+                                                    " coins (e-Wallet)"),
                                               ),
                                             ],
                                           ),
@@ -198,7 +199,7 @@ class _TabScreenState extends State<TabScreen> {
                                   width: 100,
                                   decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      border: Border.all(color: Colors.white),
+                                      border: Border.all(color: Colors.black),
                                       image: DecorationImage(
                                           fit: BoxFit.fill,
                                           image: NetworkImage(
@@ -217,6 +218,12 @@ class _TabScreenState extends State<TabScreen> {
                                       SizedBox(
                                         height: 5,
                                       ),
+                                      Text(
+                                          data[index]['fishdescription']
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontStyle: FontStyle.italic)),
                                       Text("RM " + data[index]['fishprice']),
                                       SizedBox(
                                         height: 5,
@@ -278,7 +285,7 @@ class _TabScreenState extends State<TabScreen> {
       String fishid,
       String fishtitle,
       String fishowner,
-      String fishdes,
+      String fishdescription,
       String fishprice,
       String fishtime,
       String fishimage,
@@ -291,7 +298,7 @@ class _TabScreenState extends State<TabScreen> {
       fishid: fishid,
       fishtitle: fishtitle,
       fishowner: fishowner,
-      fishdes: fishdes,
+      fishdescription: fishdescription,
       fishprice: fishprice,
       fishtime: fishtime,
       fishimage: fishimage,

@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  ff_navigation_bar: ^0.1.3
   flutter:
     sdk: flutter
 
@@ -44,6 +45,7 @@ dev_dependencies:
   extended_text: 
   flutter_webview_plugin:
   flutter_launcher_icons: ^0.7.4
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

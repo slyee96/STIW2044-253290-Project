@@ -63,154 +63,216 @@ class _TabScreen4State extends State<TabScreen4> {
             itemBuilder: (context, index) {
               if (index == 0) {
                 return Container(
-                  child: Column(
-                    children: <Widget>[
-                      Stack(children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Center(
-                              child: Text("myNelayan",
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.orange)),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            GestureDetector(
-                              onTap: _takePicture,
-                              child: Container(
-                                  width: 150.0,
-                                  height: 150.0,
-                                  decoration: new BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(color: Colors.white),
-                                      image: new DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: new NetworkImage(
-                                              "http://myondb.com/myNelayanLY/profile/${widget.user.email}.jpg?dummy=${(number)}'")))),
-                            ),
-                            SizedBox(height: 5),
-                            Container(
-                              child: Text(
-                                widget.user.name?.toUpperCase() ??
-                                    'Not register',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16),
-                              ),
-                            ),
-                            Container(
-                              child: Text(
-                                widget.user.email,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 14),
-                              ),
-                            ),
-                            Column(
-                              children: <Widget>[
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.email,
-                                    ),
-                                    Text(widget.user.phone ?? 'not registered'),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: <Widget>[
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Icon(Icons.account_balance_wallet),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Flexible(
-                                      child: Text("You have " +
-                                              widget.user.credit +
-                                              " coins (Wallet)" ??
-                                          "You have 0 coin Wallet"),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Center(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Expanded(
+                          child: Row(
+                            children: <Widget>[
+                              SizedBox(width: 35),
+                              Column(
                                 children: <Widget>[
-                                  Icon(
-                                    Icons.location_on,
-                                  ),
                                   SizedBox(
-                                    width: 5,
+                                    height: 10,
                                   ),
-                                  Flexible(
-                                    child: Text(_currentAddress),
+                                  GestureDetector(
+                                    onTap: _takePicture,
+                                    child: Container(
+                                        width: 100.0,
+                                        height: 100.0,
+                                        decoration: new BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border:
+                                                Border.all(color: Colors.white),
+                                            image: new DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: new NetworkImage(
+                                                    "http://myondb.com/myNelayanLY/profile/${widget.user.email}.jpg?dummy=${(number)}'")))),
                                   ),
                                 ],
                               ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              color: Colors.deepOrange,
-                              child: Center(
-                                child: Text("My Profile ",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white)),
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ]),
-                      SizedBox(
-                        height: 4,
+                        Expanded(
+                          child: Row(
+                            children: <Widget>[
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      "Name: " +
+                                              widget.user.name?.toUpperCase() ??
+                                          'Not register',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                    ),
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.email,
+                                          ),
+                                          Text(widget.user.email ??
+                                              'not registered'),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.phone,
+                                          ),
+                                          Text(widget.user.phone ??
+                                              'not registered'),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Icon(Icons.account_balance_wallet),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            "You have " +
+                                                    widget.user.credit +
+                                                    " coins (e-Wallet)" ??
+                                                "You have 0 coin e-Wallet",
+                                            style: TextStyle(
+                                              fontStyle: FontStyle.italic,
+                                              fontSize: 10,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      color: Colors.deepOrange,
+                      child: Center(
+                        child: Text("Location: ",
+                            style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
                       ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Flexible(
+                            child: Text(
+                              _currentAddress,
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ]),
                 );
               }
               if (index == 1) {
                 return Padding(
-                  padding: EdgeInsets.all(2.0),
+                  padding: EdgeInsets.all(1.0),
                   child: Column(
                     children: <Widget>[
-                      MaterialButton(
-                        onPressed: _changeName,
-                        child: Text("Change Name"),
+                      Container(
+                        color: Colors.deepOrange,
+                        child: Center(
+                          child: Text("Edit Account: ",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
+                        ),
                       ),
-                      MaterialButton(
-                        onPressed: _changePassword,
-                        child: Text("Change Password"),
+                      ListTile(
+                        title: Text('Change Name'),
+                        onTap: _changeName,
                       ),
-                      MaterialButton(
-                        onPressed: _changePhone,
-                        child: Text("Change Phone"),
+                      ListTile(
+                        title: Text('Change Password'),
+                        onTap: _changePassword,
                       ),
-                      MaterialButton(
-                        onPressed: _gotoWallet,
-                        child: Text("Add Coins"),
+                      ListTile(
+                        title: Text('Change Phone'),
+                        onTap: _changePhone,
                       ),
-                      MaterialButton(
-                        onPressed: _registerAccount,
-                        child: Text("Register"),
+                      Container(
+                        color: Colors.deepOrange,
+                        child: Center(
+                          child: Text("Payment: ",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
+                        ),
                       ),
-                      MaterialButton(
-                        onPressed: _gotologinPage,
-                        child: Text("Log In"),
+                      ListTile(
+                        title: Text('Add Coins'),
+                        onTap: _gotoWallet,
                       ),
-                      MaterialButton(
-                        onPressed: _logout,
-                        child: Text("Log Out"),
-                      )
+                      Container(
+                        color: Colors.deepOrange,
+                        child: Center(
+                          child: Text("Settings: ",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
+                        ),
+                      ),
+                      ListTile(
+                        title: Text('Register'),
+                        onTap: _registerAccount,
+                      ),
+                      ListTile(
+                        title: Text('Log In'),
+                        onTap: _gotologinPage,
+                      ),
+                      ListTile(
+                        title: Text('Log Out'),
+                        onTap: _logout,
+                      ),
                     ],
                   ),
                 );
